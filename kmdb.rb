@@ -78,7 +78,11 @@
 # Delete existing data, so you'll start fresh each time this script is run.
 # Use `Model.destroy_all` code.
 # TODO!
-
+# Role.destroy_all
+# Actor.destroy_all
+# Movie.destroy_all
+# Studio.destroy_all
+# Agent.destroy_all
 # Generate models and tables, according to the domain model.
 # TODO!
 
@@ -91,9 +95,12 @@ puts "Movies"
 puts "======"
 puts ""
 
+
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
-
+Movie.all.each do |movie|
+  puts "#{movie.title.ljust(22)} #{movie.year_released} #{movie.rated} #{movie.studio.name}"
+end
 # Prints a header for the cast output
 puts ""
 puts "Top Cast"
@@ -102,6 +109,10 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+Role.all.each do |role|
+  puts "#{role.movie.title.ljust(22)} #{role.actor.name.ljust(20)} #{role.character_name}"
+end
+
 
 # Prints a header for the agent's list of represented actors output
 puts ""
@@ -111,3 +122,6 @@ puts ""
 
 # Query the actor data and loop through the results to display the agent's list of represented actors output.
 # TODO!
+Actor.joins(:agent).each do |actor|
+  puts actor.name
+end
